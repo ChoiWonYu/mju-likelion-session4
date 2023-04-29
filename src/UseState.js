@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const UseState = () => {
-  let count = 0;
+  const [count1, setCount1] = useState(0);
+  useEffect(() => {
+    alert(count1);
+  }, [count1]);
 
   const handleClick = () => {
-    count++;
+    setCount1(count1 + 1);
+    //서버에 count 전송
   };
+
   return (
     <>
-      <h1>{count}</h1>
+      <h1>{count1}</h1>
+
       <button onClick={handleClick}>+1</button>
     </>
   );

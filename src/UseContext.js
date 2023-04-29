@@ -1,41 +1,44 @@
-import React from "react";
+import React, { createContext, useContext } from "react";
+
+const TextContext = createContext("");
 
 const UseContext = () => {
   return (
-    <div>
-      <FirstComponent content="Who needs me?" />
-    </div>
+    <TextContext.Provider value="Who needs me?">
+      <FirstComponent />
+    </TextContext.Provider>
   );
 };
 
-function FirstComponent({ content }) {
+function FirstComponent() {
   return (
     <div>
       <h3>I am the first component</h3>
-      <SecondComponent content={content} />
+      <SecondComponent />
     </div>
   );
 }
 
-function SecondComponent({ content }) {
+function SecondComponent() {
   return (
     <div>
       <h3>I am the second component</h3>
-      <ThirdComponent content={content} />
+      <ThirdComponent />
     </div>
   );
 }
 
-function ThirdComponent({ content }) {
+function ThirdComponent() {
   return (
     <div>
       <h3>I am the third component</h3>
-      <ComponentNeedingProps content={content} />
+      <ComponentNeedingProps />
     </div>
   );
 }
 
-function ComponentNeedingProps({ content }) {
+function ComponentNeedingProps() {
+  const content = useContext(TextContext);
   return <h3>{content}</h3>;
 }
 
